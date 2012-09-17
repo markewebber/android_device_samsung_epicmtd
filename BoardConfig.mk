@@ -37,6 +37,7 @@ BOARD_SECOND_CAMERA_DEVICE := true
 BOARD_CAMERA_LIBRARIES := libcamera
 endif
 ICS_CAMERA_BLOB := true
+BOARD_CAMERA_HAVE_ISO := true
 
 # OpenGL stuff
 USE_OPENGL_RENDERER := true
