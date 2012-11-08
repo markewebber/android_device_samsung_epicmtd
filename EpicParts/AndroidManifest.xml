@@ -23,6 +23,8 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".vibratorFragmentActivity" />
+
     </application>
 
 </manifest>

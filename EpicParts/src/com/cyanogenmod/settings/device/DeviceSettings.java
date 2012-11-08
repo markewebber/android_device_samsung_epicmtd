@@ -44,6 +44,7 @@ public class DeviceSettings extends Activity {
     public static final String KEY_TOUCHKEYLED = "touchkey_led";
     public static final String KEY_TOUCHKEY_BRIGHTNESS = "touchkey_brightness";
     public static final String KEY_USE_DOCK_AUDIO = "dock_audio";
+    public static final String KEY_VIBRATOR_TUNING = "vibrator_tuning";
 
     ViewPager mViewPager;
     TabsAdapter mTabsAdapter;
@@ -64,6 +65,8 @@ public class DeviceSettings extends Activity {
         mTabsAdapter = new TabsAdapter(this, mViewPager);
         mTabsAdapter.addTab(bar.newTab().setText(R.string.general_title),
                 GeneralFragmentActivity.class, null);
+        mTabsAdapter.addTab(bar.newTab().setText(R.string.category_vibrator_tuning_title),
+                VibratorFragmentActivity.class, null);
         mTabsAdapter.addTab(bar.newTab().setText(R.string.category_dock_title),
                 DockFragmentActivity.class, null);
 
