@@ -15,17 +15,10 @@
  -->
 <resources>
     <string-array name="touchkey_brightness_entries">
-        <item>100% (stock)</item>
+        <item>100% (Défaut)</item>
         <item>75%</item>
         <item>50%</item>
         <item>25%</item>
-        <item>Off</item>
-    </string-array>
-    <string-array translatable="false" name="touchkey_brightness_values">
-        <item>3000000</item>
-        <item>2700000</item>
-        <item>2600000</item>
-        <item>2500000</item>
-        <item>2300000</item>
+        <item>Désactivé</item>
     </string-array>
 </resources>
