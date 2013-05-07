@@ -19,16 +19,16 @@ package com.cyanogenmod.settings.device;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Vibrator;
 import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Button;
-import android.util.Log;
-import android.os.Vibrator;
 
 /**
  * Special preference type that allows configuration of both the ring volume and
@@ -38,19 +38,13 @@ public class VibratorTuningPreference extends DialogPreference implements OnClic
 
     private static final String TAG = "vibrator...";
 
-    private static final int[] SEEKBAR_ID = new int[] {
-            R.id.vibrator_seekbar
-    };
+    private static final int SEEKBAR_ID = R.id.vibrator_seekbar;
 
-    private static final int[] VALUE_DISPLAY_ID = new int[] {
-            R.id.vibrator_value
-    };
+    private static final int VALUE_DISPLAY_ID = R.id.vibrator_value;
 
-    private static final String[] FILE_PATH = new String[] {
-            "/sys/class/misc/pwm_duty/pwm_duty",
-    };
+    private static final String FILE_PATH = "/sys/class/misc/pwm_duty/pwm_duty";
 
-    private vibratorSeekBar mSeekBars[] = new vibratorSeekBar[1];
+    private VibrationSeekBar mSeekBar = new VibrationSeekBar();
 
     private static final int MAX_VALUE = 100;
 
@@ -73,18 +67,14 @@ public class VibratorTuningPreference extends DialogPreference implements OnClic
 
         sInstances++;
 
-        for (int i = 0; i < SEEKBAR_ID.length; i++) {
-            SeekBar seekBar = (SeekBar) view.findViewById(SEEKBAR_ID[i]);
-            TextView valueDisplay = (TextView) view.findViewById(VALUE_DISPLAY_ID[i]);
-            if (i < 3)
-                mSeekBars[i] = new vibratorSeekBar(seekBar, valueDisplay, FILE_PATH[i], OFFSET_VALUE, MAX_VALUE);
-            else
-                mSeekBars[i] = new vibratorSeekBar(seekBar, valueDisplay, FILE_PATH[i], 0, 10);
-        }
-        SetupButtonClickListeners(view);
+        SeekBar seekBar = (SeekBar) view.findViewById(SEEKBAR_ID);
+        TextView valueDisplay = (TextView) view.findViewById(VALUE_DISPLAY_ID);
+        mSeekBar = new VibrationSeekBar(seekBar, valueDisplay, FILE_PATH);
+
+        SetupButtonClickListener(view);
     }
 
-    private void SetupButtonClickListeners(View view) {
+    private void SetupButtonClickListener(View view) {
             Button mDefaultButton = (Button)view.findViewById(R.id.btnvibratorDefault);
             mDefaultButton.setOnClickListener(this);
 
@@ -99,125 +89,72 @@ public class VibratorTuningPreference extends DialogPreference implements OnClic
         sInstances--;
 
         if (positiveResult) {
-            for (vibratorSeekBar csb : mSeekBars) {
-                csb.save();
-            }
+            mSeekBar.save();
         } else if (sInstances == 0) {
-            for (vibratorSeekBar csb : mSeekBars) {
-                csb.reset();
-            }
+            mSeekBar.reset();
         }
     }
 
-    /**
-     * Restore screen color tuning from SharedPreferences. (Write to kernel.)
-     *
-     * @param context The context to read the SharedPreferences from
-     */
     public static void restore(Context context) {
         if (!isSupported()) {
             return;
         }
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        Boolean bFirstTime = sharedPrefs.getBoolean("FirstTimevibrator", true);
-        for (String filePath : FILE_PATH) {
-            String sDefaultValue = Utils.readOneLine(filePath);
-            int iValue = sharedPrefs.getInt(filePath, Integer.valueOf(sDefaultValue));
-            if (bFirstTime)
-                Utils.writeValue(filePath, "100");
-            else
-                Utils.writeValue(filePath, String.valueOf((long) iValue));
-        }
-        if (bFirstTime)
-        {
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putBoolean("FirstTimevibrator", false);
-            editor.commit();
-        }
+        int value = sharedPrefs.getInt(FILE_PATH, MAX_VALUE);
+        Utils.writeValue(FILE_PATH, String.valueOf(value));
     }
 
-    /**
-     * Check whether the running kernel supports color tuning or not.
-     *
-     * @return Whether color tuning is supported or not
-     */
     public static boolean isSupported() {
         boolean supported = true;
-        for (String filePath : FILE_PATH) {
-            if (!Utils.fileExists(filePath)) {
-                supported = false;
-            }
+        if (!Utils.fileExists(FILE_PATH)) {
+            supported = false;
         }
 
         return supported;
     }
 
-    class vibratorSeekBar implements SeekBar.OnSeekBarChangeListener {
+    class VibrationSeekBar implements SeekBar.OnSeekBarChangeListener {
 
-        private String mFilePath;
+        protected String mFilePath;
+        protected int mOriginal;
+        protected SeekBar mSeekBar;
+        protected TextView mValueDisplay;
 
-        private int mOriginal;
-
-        private SeekBar mSeekBar;
-
-        private TextView mValueDisplay;
-
-        private int iOffset;
-
-        private int iMax;
-
-        public vibratorSeekBar(SeekBar seekBar, TextView valueDisplay, String filePath, Integer offsetValue, Integer maxValue) {
-            int iValue;
-
+        public VibrationSeekBar(SeekBar seekBar, TextView valueDisplay, String filePath) {
             mSeekBar = seekBar;
             mValueDisplay = valueDisplay;
             mFilePath = filePath;
-            iOffset = offsetValue;
-            iMax = maxValue;
-
-            SharedPreferences sharedPreferences = getSharedPreferences();
 
             // Read original value
-            if (Utils.fileExists(mFilePath)) {
-                String sDefaultValue = Utils.readOneLine(mFilePath);
-                iValue = convertVibratorToAverage(Integer.valueOf(sDefaultValue));
-            } else {
-                iValue = iMax - iOffset;
-            }
-            mOriginal = iValue;
+            SharedPreferences sharedPreferences = getSharedPreferences();
+            mOriginal = sharedPreferences.getInt(mFilePath, MAX_VALUE);
 
-            mSeekBar.setMax(iMax);
-
+            seekBar.setMax(MAX_VALUE);
             reset();
-            mSeekBar.setOnSeekBarChangeListener(this);
+            seekBar.setOnSeekBarChangeListener(this);
+        }
+
+        // For inheriting class
+        protected VibrationSeekBar() {
         }
 
         public void reset() {
-            int iValue;
-
-            iValue = mOriginal + iOffset;
-            mSeekBar.setProgress(iValue);
+            mSeekBar.setProgress(mOriginal);
             updateValue(mOriginal);
         }
 
         public void save() {
-            int iValue;
-
-            iValue = mSeekBar.getProgress() - iOffset;
             Editor editor = getEditor();
-            editor.putInt(mFilePath, convertAverageToVibrator(iValue));
+            editor.putInt(mFilePath, mSeekBar.getProgress());
             editor.commit();
         }
 
         @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            int iValue;
-
-            iValue = progress - iOffset;
-            Utils.writeValue(mFilePath, String.valueOf((long) convertAverageToVibrator(iValue)));
-            updateValue(iValue);
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                boolean fromUser) {
+            Utils.writeValue(mFilePath, String.valueOf(progress));
+            updateValue(progress);
         }
 
         @Override
@@ -234,44 +171,27 @@ public class VibratorTuningPreference extends DialogPreference implements OnClic
             mValueDisplay.setText(String.format("%d", (int) progress));
         }
 
-        public void setNewValue(int iValue) {
-            mOriginal = iValue;
-            reset();
+        public void resetDefault() {
+            mSeekBar.setProgress(MAX_VALUE);
+            updateValue(MAX_VALUE);
+            Utils.writeValue(mFilePath, String.valueOf(MAX_VALUE));
         }
-
-        private int convertAverageToVibrator(int averageValue) {
-            int resultVibrator;
-
-            resultVibrator = (averageValue * 127) / 100;
-            return resultVibrator;
-        }
-
-        private int convertVibratorToAverage(int resultVibrator) {
-            int averageValue;
-
-            averageValue = (resultVibrator * 100) / 127;
-            return averageValue;
-        }
-
     }
 
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.btnvibratorDefault:
-                    setDefaultSettings();
-                    break;
             case R.id.btnvibratorTest:
-                    testVibration();
-                    break;
+                testVibration();
+                break;
+            case R.id.btnvibratorDefault:
+                mSeekBar.resetDefault();
+                break;
         }
     }
 
-    private void setDefaultSettings() {
-        mSeekBars[0].setNewValue(100);
-    }
-
-    private void testVibration() {
+    public void testVibration() {
         Vibrator vib = (Vibrator) this.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         vib.vibrate(1000);
     }
+
 }
