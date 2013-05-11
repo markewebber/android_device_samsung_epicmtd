@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">高级设置</string>
+
+    <string name="general_title">常规</string>
+
+    <string name="category_touchkey_title">触摸键</string>
+    <string name="touchkey_led_title_head">禁用触摸键背光灯</string>
+    <string name="touchkey_led_summary_head">触摸键背光灯在超时后不会再点亮 (除非再次被按)</string>
+    <string name="touchkey_led_toast_message">选项更改将在关闭和开启屏幕后生效</string>
+
+    <string name="touchkey_brightness_title_head">触摸键亮度</string>
+    <string name="touchkey_brightness_summary_head">设定触摸键背光灯的亮度</string>
+    <string name="touchkey_brightness_toast_message">正在重置触摸控制器，请稍等/u2026</string>
+
+    <string name="category_dock_title">基座</string>
+    <string name="dockaudio_subcat_title">基座音频</string>
+    <string name="use_dock_audio_title_head">使用基座的 USB 音频</string>
+    <string name="use_dock_audio_summary_head">使用基座上的被动音频输出</string>
+
+    <string name="category_vibrator_tuning_title">振动</string>
+    <string name="vibrator_tuning_title_head">振动反馈调整</string>
+    <string name="vibrator_tuning_summary_head">调整振动反馈的默认强度</string>
+    <string name="vibrator_title">振动 %</string>
+    <string name="vibrator_default_title">默认</string>
+    <string name="vibrator_test_title">测试</string>
+
+</resources>
