@@ -27,4 +27,10 @@
     <string name="dockaudio_subcat_title">Sonido de la base</string>
     <string name="use_dock_audio_title_head">Usar sonido USB</string>
     <string name="use_dock_audio_summary_head">Utilizar la salida de audio de la base</string>
+    <string name="category_vibrator_tuning_title">Vibración</string>
+    <string name="vibrator_tuning_title_head">Respuesta háptica</string>
+    <string name="vibrator_tuning_summary_head">Establece la fuerza predeterminada para la respuesta háptica (vibración)</string>
+    <string name="vibrator_title">Vibración %</string>
+    <string name="vibrator_default_title">Predet.</string>
+    <string name="vibrator_test_title">Probar</string>
 </resources>
