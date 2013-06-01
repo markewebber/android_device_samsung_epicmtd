@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Advanced settings</string>
 
     <!-- Page Headers -->
@@ -26,7 +26,7 @@
 
     <string name="touchkey_brightness_title_head">Touchkey Brightness</string>
     <string name="touchkey_brightness_summary_head">Set the brightness of the capacitive touchkey backlights.</string>
-    <string name="touchkey_brightness_toast_message">Resetting the touch controller.  Please wait...</string>
+    <string name="touchkey_brightness_toast_message">Resetting the touch controller. Please wait...</string>
 
     <string name="category_dock_title">Dock</string>
     <string name="dockaudio_subcat_title">DOCK AUDIO</string>
@@ -39,5 +39,4 @@
     <string name="vibrator_title">Vibration %</string>
     <string name="vibrator_default_title">Default</string>
     <string name="vibrator_test_title">Test</string>
-
 </resources>

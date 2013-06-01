@@ -15,10 +15,10 @@
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string-array name="touchkey_brightness_entries">
-        <item>100% (původní)</item>
+        <item>100% (standaard)</item>
         <item>75%</item>
         <item>50%</item>
         <item>25%</item>
-        <item>Vypnuto</item>
+        <item>Uit</item>
     </string-array>
 </resources>
