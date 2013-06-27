@@ -27,4 +27,10 @@
     <string name="dockaudio_subcat_title">Áudio do dock</string>
     <string name="use_dock_audio_title_head">Usar áudio do dock USB</string>
     <string name="use_dock_audio_summary_head">Usar a saída de áudio passiva no dock</string>
+    <string name="category_vibrator_tuning_title">Vibração</string>
+    <string name="vibrator_tuning_title_head">Ajustes de vibração</string>
+    <string name="vibrator_tuning_summary_head">Controla a força padrão da vibração</string>
+    <string name="vibrator_title">Vibração %</string>
+    <string name="vibrator_default_title">Padrão</string>
+    <string name="vibrator_test_title">Teste</string>
 </resources>
