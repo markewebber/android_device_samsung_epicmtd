@@ -112,3 +112,18 @@ TARGET_OTA_ASSERT_DEVICE := epic,epicmtd,SPH-D700
 
 # RIL
 BOARD_RIL_CLASS := "../../../device/samsung/epicmtd/epicril/"
+
+BOARD_SEPOLICY_DIRS := \
+        device/samsung/epicmtd/sepolicy
+
+BOARD_SEPOLICY_UNION := \
+	device.te \
+	domain.te \
+	file_contexts \
+	file.te \
+	init.te \
+	pvrsrvinit.te \
+	rild.te \
+	system.te \
+	wimax.te \
+	wpa_supplicant.te

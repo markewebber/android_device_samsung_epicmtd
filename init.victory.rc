@@ -33,6 +33,8 @@ on post-fs
   exec /system/xbin/busybox mknod -m 0660 /dev/uwibro c 233 0
   chown system system /dev/swmxctl
   exec /system/xbin/busybox chown system.system /dev/uwibro
+  restorecon /dev/swmxctl
+  restorecon /dev/uwibro
 
   # For sensor control
   chown system input /sys/class/input/input0/enable
@@ -253,10 +255,17 @@ on boot
   # EpicParts: Disable Touchkey Lights
   chown root system /sys/devices/virtual/sec/t_key/touchleds_disabled
   chmod 0664 /sys/devices/virtual/sec/t_key/touchleds_disabled
+  restorecon /sys/devices/virtual/sec/t_key/touchleds_disabled
 
   # EpicParts: Touchkey Backlight Brightness
   chown root system /sys/devices/virtual/sec/t_key/touchleds_voltage
   chmod 0664 /sys/devices/virtual/sec/t_key/touchleds_voltage
+  restorecon /sys/devices/virtual/sec/t_key/touchleds_voltage
+
+  # EpicParts: Vibration intensity tuning
+  chown root system /sys/devices/virtual/misc/pwm_duty/pwm_duty
+  chmod 0664 /sys/devices/virtual/misc/pwm_duty/pwm_duty
+  restorecon /sys/devices/virtual/misc/pwm_duty/pwm_duty
 
   # Set keypad delays to recommended values.
   write /sys/devices/platform/s3c-keypad/column_delay 35
@@ -332,7 +341,7 @@ service pvrsrvinit /system/vendor/bin/pvrsrvinit
 service wpa_supplicant /system/bin/wpa_supplicant \
                -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
   class main
-  socket wpa_wlan0 dgram 0660 wifi wifi
+  socket wpa_wlan0 dgram 0660 wifi wifi u:object_r:wpa_socket:s0
   disabled
   oneshot
 

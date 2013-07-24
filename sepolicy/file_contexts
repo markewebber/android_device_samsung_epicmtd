@@ -1,0 +1,24 @@
+/dev/dpram0                     u:object_r:radio_device:s0
+/dev/dpram1                     u:object_r:radio_device:s0
+/dev/dpramerr                   u:object_r:radio_device:s0
+/dev/ttyCDMA0                   u:object_r:radio_device:s0
+/dev/ttyTRFB0                   u:object_r:radio_device:s0
+/dev/multipdp                   u:object_r:radio_device:s0
+/dev/ttyCSD0                    u:object_r:radio_device:s0
+/dev/uwibro                     u:object_r:wimax_device:s0
+/dev/swmxctl                    u:object_r:wimax_device:s0
+
+# Bluetooth
+/dev/s3c2410_serial0            u:object_r:bluetooth_device:s0
+
+#GFX
+/dev/pvrsrvkm                   u:object_r:powervr_device:s0
+/system/vendor/bin/pvrsrvinit   u:object_r:pvrsrvinit_exec:s0
+
+# Vibrator
+/dev/tspdrv                     u:object_r:input_device:s0
+/sys/devices/virtual/misc/pwm_duty/pwm_duty -- u:object_r:sysfs_device_writable:s0
+
+/sys/devices/virtual/sec/t_key/touchleds_disabled -- u:object_r:sysfs_device_writable:s0
+/sys/devices/virtual/sec/t_key/touchleds_voltage -- u:object_r:sysfs_device_writable:s0
+
