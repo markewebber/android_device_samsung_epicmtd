@@ -25,12 +25,12 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/epicmtd/overlay
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
     device/samsung/epicmtd/prebuilt/etc/asound.conf:system/etc/asound.conf \
-    device/samsung/epicmtd/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     device/samsung/epicmtd/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
     device/samsung/epicmtd/prebuilt/etc/egl.cfg:system/lib/egl/egl.cfg
 
 # Init files
 PRODUCT_COPY_FILES += \
+  device/samsung/epicmtd/fstab.victory:root/fstab.victory \
   device/samsung/epicmtd/ueventd.victory.rc:root/ueventd.victory.rc \
   device/samsung/epicmtd/lpm.rc:root/lpm.rc \
   device/samsung/epicmtd/init.victory.rc:root/init.victory.rc \
