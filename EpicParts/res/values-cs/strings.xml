@@ -18,7 +18,7 @@
 
     <string name="general_title">Obecné</string>
 
-    <string name="category_touchkey_title">Kapacitní tlačítka</string>
+    <string name="category_touchkey_title">Dotyková tlačítka</string>
     <string name="touchkey_led_title_head">Zakázat podsvícení tlačítek</string>
     <string name="touchkey_led_summary_head">Pokud není tlačítko stisknuto, nerozsvítí se po uplynutí času jeho podsvícení.</string>
     <string name="touchkey_led_toast_message">Změny v nastavení se projeví po vypnutí a zapnutí obrazovky.</string>
@@ -37,5 +37,4 @@
     <string name="vibrator_tuning_summary_head">Změna výchozí intenzity vibrací</string>
     <string name="vibrator_title">Vibrace %</string>
     <string name="vibrator_default_title">Výchozí</string>
-    <string name="vibrator_test_title">Test</string>
 </resources>
