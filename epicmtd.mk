@@ -161,6 +161,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
        wifi.supplicant_scan_interval=20
 
+# SGX540 is slower with the scissor optimization enabled
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.hwui.disable_scissor_opt=true
+
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
 PRODUCT_PROPERTY_OVERRIDES += \
