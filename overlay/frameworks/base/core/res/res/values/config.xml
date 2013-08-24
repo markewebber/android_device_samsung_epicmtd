@@ -83,6 +83,8 @@
         <item>255</item>
     </integer-array>  
 
+    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
+
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">10</integer>
     
