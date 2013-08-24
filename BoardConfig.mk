@@ -129,3 +129,6 @@ BOARD_SEPOLICY_UNION := \
 	system.te \
 	wimax.te \
 	wpa_supplicant.te
+
+# Hardware tunables
+BOARD_HARDWARE_CLASS := device/samsung/epicmtd/cmhw/
