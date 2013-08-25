@@ -36,6 +36,7 @@ static char const BLUE_LED_DIR[]  = "/sys/class/leds/blue";
 static char const LCD_FILE[]      = "/sys/class/backlight/s5p_bl/brightness";
 static char const KEYBOARD_FILE[] = "/sys/devices/platform/s3c-keypad/brightness";
 static char const BUTTONS_FILE[]  = "/sys/class/sec/t_key/brightness";
+static char const BRIGHTNESS_FILE[] = "/sys/devices/virtual/sec/t_key/touchleds_voltage";
 
 static struct led_state {
 	unsigned int enabled;
@@ -254,8 +255,15 @@ static int set_light_buttons(struct light_device_t *dev,
 
 	int touch_led_control = !!(state->color & 0x00ffffff);
 	int res;
+        int brightness = rgb_to_brightness(state);
 
-	ALOGD("set_light_buttons: color=%#010x, tlc=%u.", state->color,
+        if (brightness > 0) {
+            pthread_mutex_lock(&g_lock);
+            write_int(BRIGHTNESS_FILE, brightness);
+            pthread_mutex_unlock(&g_lock);
+        }
+
+	ALOGD("set_light_buttons: brightness=%u, color=%#010x, tlc=%u.", brightness, state->color,
 	     touch_led_control);
 
 	pthread_mutex_lock(&g_lock);
