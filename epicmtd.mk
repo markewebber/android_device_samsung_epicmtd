@@ -82,7 +82,6 @@ PRODUCT_COPY_FILES += \
 
 # update utilities
 PRODUCT_PACKAGES += \
-	make_ext4fs \
 	bml_over_mtd \
 	setup_fs
 
