@@ -1,0 +1,1 @@
+allow rild self:netlink_kobject_uevent_socket { create setopt bind read };
