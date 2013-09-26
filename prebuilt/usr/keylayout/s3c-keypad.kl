@@ -43,7 +43,7 @@ key 35    V                 WAKE_DROPPED
 key 36    B                 WAKE_DROPPED
 key 37    N                 WAKE_DROPPED
 key 38    M                 WAKE_DROPPED
-key 39    DPAD_UP           WAKE_DROPPED
+key 39    DPAD_RIGHT        WAKE_DROPPED
 key 40    ENTER             WAKE_DROPPED
 
 key 41    SHIFT_LEFT        WAKE_DROPPED
@@ -54,9 +54,9 @@ key 45    SPACE             WAKE_DROPPED
 
 key 46    CAMERA
 key 47    PERIOD            WAKE_DROPPED
-key 48    DPAD_LEFT         WAKE_DROPPED
-key 49    DPAD_DOWN         WAKE_DROPPED
-key 50    DPAD_RIGHT        WAKE_DROPPED
+key 48    DPAD_UP           WAKE_DROPPED
+key 49    DPAD_LEFT         WAKE_DROPPED
+key 50    DPAD_DOWN         WAKE_DROPPED
 
 key 51    VOLUME_UP         WAKE
 key 52    VOLUME_DOWN       WAKE
