@@ -47,6 +47,7 @@ def CopyBMLoverMTD(output_zip):
   output_zip.write(os.path.join(UTILITIES_DIR, "bml_over_mtd"),"bml_over_mtd")
   output_zip.write(os.path.join(LOCAL_DIR, "bml_over_mtd.sh"),"bml_over_mtd.sh")
   output_zip.write(os.path.join(TARGET_DIR, "updater.sh"),"updater.sh")
+  output_zip.write(os.path.join(TARGET_DIR, "restorecon.sh"),"restorecon.sh")
   output_zip.write(os.path.join(TARGET_DIR, "recovery.bin"),"recovery.bin")
 
 def WriteFullOTAPackage(input_zip, output_zip):

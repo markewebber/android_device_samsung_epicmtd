@@ -200,7 +200,8 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # copy the filesystem converter
 PRODUCT_COPY_FILES += \
-  device/samsung/epicmtd/updater.sh:updater.sh
+  device/samsung/epicmtd/updater.sh:updater.sh \
+  device/samsung/epicmtd/restorecon.sh:restorecon.sh
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
