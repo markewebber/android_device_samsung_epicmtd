@@ -193,6 +193,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
+# Charger
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images
+
 # dalvik.vm.heapstartsize=5m
 # dalvik.vm.heapgrowthlimit=48m
 # dalvik.vm.heapsize=128m
