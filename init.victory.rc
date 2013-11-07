@@ -87,6 +87,9 @@ on boot
   # for systrace
   mount debugfs /sys/kernel/debug /sys/kernel/debug
 
+  # Prevents permission denied error for telephony
+  chmod 0644 /proc/cmdline
+
   # Fake some battery state
   setprop status.battery.state Slow
   setprop status.battery.level 5
