@@ -4,9 +4,6 @@ PRODUCT_RELEASE_NAME := EpicMTD
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-# Inherit CDMA stuff
-$(call inherit-product, vendor/cm/config/cdma.mk)
-
 # Inherit device configuration
 $(call inherit-product, device/samsung/epicmtd/full_epicmtd.mk)
 
