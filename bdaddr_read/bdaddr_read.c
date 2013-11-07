@@ -17,7 +17,7 @@
 int main() {
     int fd;
     char addr_from_ril[PROPERTY_VALUE_MAX];
-    char buf[23];
+    char buf[PROPERTY_VALUE_MAX];
     struct stat st;
 
     /*
