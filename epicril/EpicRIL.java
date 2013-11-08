@@ -63,4 +63,27 @@ public class EpicRIL extends SamsungExynos3RIL implements CommandsInterface {
             response[5], response[6], false);
         return signalStrength;
     }
+
+    @Override
+    protected void
+    processUnsolicited (Parcel p) {
+        int response;
+        Object ret;
+        int dataPosition = p.dataPosition();
+
+        response = p.readInt();
+
+        switch(response) {
+
+            case RIL_UNSOL_DATA_CALL_LIST_CHANGED: ret =  responseVoid(p); break;
+
+            default:
+                // Rewind the Parcel
+                p.setDataPosition(dataPosition);
+
+                // Forward responses that we are not overriding to the super class
+                super.processUnsolicited(p);
+                return;
+        }
+    }
  }
