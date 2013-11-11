@@ -10,10 +10,13 @@ on init
   # class 'core' because the rild doesn't like being killed. (During device encryption.)
   stop ril-daemon
 
-on fs
   # External microSDcard storage
+  mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+  mkdir /storage/sdcard0 0700 root root
+
   export EXTERNAL_STORAGE /storage/sdcard0
-  mkdir /storage/sdcard0 0000 root root
+
+on fs
   symlink /storage/sdcard0 /sdcard
   symlink /storage/sdcard0 /mnt/sdcard
 
@@ -427,3 +430,7 @@ service tvouthack /system/bin/tvouthack
   user system
   group graphics
   disabled
+
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
+    disabled
