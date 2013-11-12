@@ -81,6 +81,8 @@ BOARD_KERNEL_PAGESIZE := 4096
 # hwcomposer: custom vsync ioctl
 BOARD_CUSTOM_VSYNC_IOCTL := true
 
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
+
 # Define kernel config for inline building
 TARGET_KERNEL_CONFIG := cyanogenmod_epicmtd_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/epicmtd/
