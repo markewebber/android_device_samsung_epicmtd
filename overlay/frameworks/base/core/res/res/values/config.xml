@@ -286,8 +286,4 @@
          The existence of this file will be used to determine in the
 	 legacy USB manager should be started. -->
     <string name="config_legacyUmsLunFile">/sys/devices/platform/usb_mass_storage/lun0/file</string>
-
-    <!-- Component name of the default wallpaper. This will be ImageWallpaper if not
-                  specified -->
-    <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
 </resources>
